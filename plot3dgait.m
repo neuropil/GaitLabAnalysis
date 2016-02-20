@@ -98,3 +98,60 @@ end
 pause(0.5)
     
 end
+
+
+%%
+
+
+for ii = 1:height(noS)
+    
+    
+    %     plot3(noS.CLAVX(ii),noS.CLAVY(ii),noS.CLAVZ(ii),'Color','r',...
+    %         'Marker','o','FaceColor','r','MarkerSize',9)
+    cla
+    scatter3(noS.RWrist_ARAngles_X(ii), noS.RWrist_ARAngles_Y(ii), noS.RWrist_ARAngles_Z(ii),50,'r','filled')
+    hold on
+    scatter3(noS.RElbow_ARAngles_X(ii), noS.RElbow_ARAngles_Y(ii), noS.RElbow_ARAngles_Z(ii),50,'r','filled')
+    scatter3(noS.RShoulder_ARAngles_X(ii), noS.RShoulder_ARAngles_Y(ii), noS.RShoulder_ARAngles_Z(ii),50,'b','filled')
+    
+    xS = [noS.RWrist_ARAngles_X(ii) , noS.RElbow_ARAngles_X(ii)];
+    yS = [noS.RWrist_ARAngles_Y(ii) , noS.RElbow_ARAngles_Y(ii)];
+    zS = [noS.RWrist_ARAngles_Z(ii) , noS.RElbow_ARAngles_Z(ii)];
+    
+    xS2 = [noS.RElbow_ARAngles_X(ii) , noS.RShoulder_ARAngles_X(ii)];
+    yS2 = [noS.RElbow_ARAngles_Y(ii) , noS.RShoulder_ARAngles_Y(ii)];
+    zS2 = [noS.RElbow_ARAngles_Z(ii) , noS.RShoulder_ARAngles_Z(ii)];
+    
+    % Connector
+    plot3(xS, yS, zS,'r')
+    plot3(xS2, yS2, zS2,'b')
+    
+    if ii > 1
+        
+        scatter3(noS.RWrist_ARAngles_X(1:ii-1), noS.RWrist_ARAngles_Y(1:ii-1), noS.RWrist_ARAngles_Z(1:ii-1),40,'r')
+        scatter3(noS.RElbow_ARAngles_X(1:ii-1), noS.RElbow_ARAngles_Y(1:ii-1), noS.RElbow_ARAngles_Z(1:ii-1),40,'r')
+        
+        scatter3(noS.RShoulder_ARAngles_X(1:ii-1), noS.RShoulder_ARAngles_Y(1:ii-1), noS.RShoulder_ARAngles_Z(1:ii-1),40,'b')
+
+        
+        
+        % xS2 = [noS.LElbow_ARAnglesX(1:ii-1)' ; noS.LShoulder_ARAnglesX(1:ii-1)'];
+        % yS2 = [noS.LElbow_ARAnglesY(1:ii-1) ; noS.LShoulder_ARAnglesY(1:ii-1)];
+        % zS2 = [noS.LElbow_ARAnglesZ(1:ii-1) ; noS.LShoulder_ARAnglesZ(1:ii-1)];
+        
+        line([noS.RWrist_ARAngles_X(1:ii-1)  noS.RElbow_ARAngles_X(1:ii-1)]',...
+             [noS.RWrist_ARAngles_Y(1:ii-1)  noS.RElbow_ARAngles_Y(1:ii-1)]',...
+             [noS.RWrist_ARAngles_Z(1:ii-1)  noS.RElbow_ARAngles_Z(1:ii-1)]','Color','r');
+         
+        line([noS.RElbow_ARAngles_X(1:ii-1)  noS.RShoulder_ARAngles_X(1:ii-1)]',...
+             [noS.RElbow_ARAngles_Y(1:ii-1)  noS.RShoulder_ARAngles_Y(1:ii-1)]',...
+             [noS.RElbow_ARAngles_Z(1:ii-1)  noS.RShoulder_ARAngles_Z(1:ii-1)]','Color','b');
+        
+        % plot3(xS2, yS2, zS2,'k')
+        
+        
+    end
+    
+    pause(0.2)
+    
+end
