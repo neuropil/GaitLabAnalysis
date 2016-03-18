@@ -366,7 +366,7 @@ zlabel('z')
 
 %%
 
-noS = import_DBS_gait;
+noS = import_DBS_gait('E:\Dropbox\GAIT1\aDBS01 predata\With Strap');
 
 %%
 R1 = 'RMC3';
@@ -383,7 +383,22 @@ useNorm = 1;
 ploy3D_Gait(ds, R1, R2, R3, L1, L2, L3, useNorm )
 
 
+%% AT REST - Right
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\aDBS01 predata\With Strap');
+
 %%
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\bDBS01 Post Data\With strap');
+
+%%
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\cDBS01\With Strap');
+
+
+%%
+figure;
+ds = noS;
 R1 = 'RMC3';
 R2 = 'RELB';
 R3 = 'RSHO';
@@ -406,5 +421,48 @@ uicontrol('Style', 'pushbutton', 'String', 'Sagittal',...
     'Position', [120 10 50 20],...
     'Callback', 'view([0 0])');
 
+
+
+
+%% AT REST - Reach Forward
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\aDBS01 predata\With Strap');
+
+%%
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\bDBS01 Post Data\With strap');
+
+%%
+
+noS = import_DBS_gait('E:\Dropbox\GAIT1\cDBS01\With Strap');
+
+
+%%
+
+ds = noS;
+R1 = 'RMC3';
+R2 = 'RELB';
+R3 = 'RSHO';
+
+singleARM( ds , R1 , R2, R3 )
+
+% view([90 90])
+% view([0 0])
+% view([90 0])
+%
+% Create push button
+
+uicontrol('Style', 'pushbutton', 'String', 'Axial',...
+    'Position', [10 10 50 20],...
+    'Callback', 'view([90 90])');
+uicontrol('Style', 'pushbutton', 'String', 'Coronal',...
+    'Position', [65 10 50 20],...
+    'Callback', 'view([90 0])');
+uicontrol('Style', 'pushbutton', 'String', 'Sagittal',...
+    'Position', [120 10 50 20],...
+    'Callback', 'view([0 0])');
+
+
+zlim([400 1100])
 
 
