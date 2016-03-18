@@ -303,28 +303,108 @@ end
 
 %%
 
-if ii > 1
-    
-    scatter3(noS.RWrist_ARAngles_X(1:ii-1), noS.RWrist_ARAngles_Y(1:ii-1), noS.RWrist_ARAngles_Z(1:ii-1),40,'r')
-    scatter3(noS.RElbow_ARAngles_X(1:ii-1), noS.RElbow_ARAngles_Y(1:ii-1), noS.RElbow_ARAngles_Z(1:ii-1),40,'r')
-    
-    scatter3(noS.RShoulder_ARAngles_X(1:ii-1), noS.RShoulder_ARAngles_Y(1:ii-1), noS.RShoulder_ARAngles_Z(1:ii-1),40,'b')
-    
-    
-    
-    % xS2 = [noS.LElbow_ARAnglesX(1:ii-1)' ; noS.LShoulder_ARAnglesX(1:ii-1)'];
-    % yS2 = [noS.LElbow_ARAnglesY(1:ii-1) ; noS.LShoulder_ARAnglesY(1:ii-1)];
-    % zS2 = [noS.LElbow_ARAnglesZ(1:ii-1) ; noS.LShoulder_ARAnglesZ(1:ii-1)];
-    
-    line([noS.RWrist_ARAngles_X(1:ii-1)  noS.RElbow_ARAngles_X(1:ii-1)]',...
-        [noS.RWrist_ARAngles_Y(1:ii-1)  noS.RElbow_ARAngles_Y(1:ii-1)]',...
-        [noS.RWrist_ARAngles_Z(1:ii-1)  noS.RElbow_ARAngles_Z(1:ii-1)]','Color','r');
-    
-    line([noS.RElbow_ARAngles_X(1:ii-1)  noS.RShoulder_ARAngles_X(1:ii-1)]',...
-        [noS.RElbow_ARAngles_Y(1:ii-1)  noS.RShoulder_ARAngles_Y(1:ii-1)]',...
-        [noS.RElbow_ARAngles_Z(1:ii-1)  noS.RShoulder_ARAngles_Z(1:ii-1)]','Color','b');
-    
-    % plot3(xS2, yS2, zS2,'k')
-    
-    
-end
+noS_pre = import_DBS_gait;
+noS_post3 = import_DBS_gait;
+noS_post6 = import_DBS_gait;
+% pre
+% Strap arm front
+
+%%
+
+% for ii = 1:height(noS)r
+
+scatter3(noS.LMC3_X, noS.LMC3_Y, noS.LMC3_Z,30,'r')
+%     scatter3(noS.RElbow_ARAngles_X(1:ii-1), noS.RElbow_ARAngles_Y(1:ii-1), noS.RElbow_ARAngles_Z(1:ii-1),40,'r')
+hold on
+scatter3(noS.RMC3_X, noS.RMC3_Y, noS.RMC3_Z,30,'b')
+
+figure;
+
+scatter3(noS_post3.LMC3_X, noS_post3.LMC3_Y, noS_post3.LMC3_Z,30,'r')
+%     scatter3(noS.RElbow_ARAngles_X(1:ii-1), noS.RElbow_ARAngles_Y(1:ii-1), noS.RElbow_ARAngles_Z(1:ii-1),40,'r')
+hold on
+scatter3(noS_post3.RMC3_X, noS_post3.RMC3_Y, noS_post3.RMC3_Z,30,'b')
+
+
+
+%%
+
+figure;
+scatter3(noS.LMC3_X, noS.LMC3_Y, noS.LMC3_Z,30,'r')
+hold on
+nr = [1 0.7 0.7];
+nr2 = [1 0.5 0.5];
+
+p3y = noS_post3.LMC3_Y;
+scatter3(noS_post3.LMC3_X, p3y, noS_post3.LMC3_Z,30,nr)
+
+p6y = noS_post6.LMC3_Y;
+scatter3(noS_post6.LMC3_X, p6y, noS_post6.LMC3_Z,30,nr2)
+xlabel('x')
+ylabel('y')
+zlabel('z')
+
+
+
+% xS2 = [noS.LElbow_ARAnglesX(1:ii-1)' ; noS.LShoulder_ARAnglesX(1:ii-1)'];
+% yS2 = [noS.LElbow_ARAnglesY(1:ii-1) ; noS.LShoulder_ARAnglesY(1:ii-1)];
+% zS2 = [noS.LElbow_ARAnglesZ(1:ii-1) ; noS.LShoulder_ARAnglesZ(1:ii-1)];
+
+%     line([noS.RWrist_ARAngles_X(1:ii-1)  noS.RElbow_ARAngles_X(1:ii-1)]',...
+%         [noS.RWrist_ARAngles_Y(1:ii-1)  noS.RElbow_ARAngles_Y(1:ii-1)]',...
+%         [noS.RWrist_ARAngles_Z(1:ii-1)  noS.RElbow_ARAngles_Z(1:ii-1)]','Color','r');
+%
+%     line([noS.RElbow_ARAngles_X(1:ii-1)  noS.RShoulder_ARAngles_X(1:ii-1)]',...
+%         [noS.RElbow_ARAngles_Y(1:ii-1)  noS.RShoulder_ARAngles_Y(1:ii-1)]',...
+%         [noS.RElbow_ARAngles_Z(1:ii-1)  noS.RShoulder_ARAngles_Z(1:ii-1)]','Color','b');
+
+% plot3(xS2, yS2, zS2,'k')
+
+
+% end
+
+
+%%
+
+noS = import_DBS_gait;
+
+%%
+R1 = 'RMC3';
+R2 = 'RELB';
+R3 = 'RSHO';
+L1 = 'LMC3';
+L2 = 'LELB';
+L3 = 'LSHO';
+
+ds = noS;
+useNorm = 1;
+
+%%
+ploy3D_Gait(ds, R1, R2, R3, L1, L2, L3, useNorm )
+
+
+%%
+R1 = 'RMC3';
+R2 = 'RELB';
+R3 = 'RSHO';
+
+singleARM( ds , R1 , R2, R3 )
+
+% view([90 90])
+% view([0 0])
+% view([90 0])
+%
+% Create push button
+
+uicontrol('Style', 'pushbutton', 'String', 'Axial',...
+    'Position', [10 10 50 20],...
+    'Callback', 'view([90 90])');
+uicontrol('Style', 'pushbutton', 'String', 'Coronal',...
+    'Position', [65 10 50 20],...
+    'Callback', 'view([90 0])');
+uicontrol('Style', 'pushbutton', 'String', 'Sagittal',...
+    'Position', [120 10 50 20],...
+    'Callback', 'view([0 0])');
+
+
+
