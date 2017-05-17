@@ -303,9 +303,9 @@ end
 
 %%
 
-noS_pre = import_DBS_gait;
-noS_post3 = import_DBS_gait;
-noS_post6 = import_DBS_gait;
+noS_pre = import_DBS_gait('E:\Dropbox\GAIT1\aDBS01 predata\With Strap');
+% noS_post3 = import_DBS_gait;
+noS_post6 = import_DBS_gait('E:\Dropbox\GAIT1\cDBS01\With Strap');
 % pre
 % Strap arm front
 
@@ -329,17 +329,47 @@ scatter3(noS_post3.RMC3_X, noS_post3.RMC3_Y, noS_post3.RMC3_Z,30,'b')
 
 %%
 
-figure;
-scatter3(noS.LMC3_X, noS.LMC3_Y, noS.LMC3_Z,30,'r')
-hold on
+% figure;
+% scatter3(noS.RMC3_X, noS.RMC3_Y, noS.RMC3_Z,30,'r')
+% hold on
+
+%% Normalize
+
+preRX = noS_pre.RMC3_X - min(noS_pre.RMC3_X);
+postRX = noS_post6.RMC3_X - min(noS_post6.RMC3_X);
+
+postRX = postRX + 150;
+
+preRY = noS_pre.RMC3_Y - min(noS_pre.RMC3_Y);
+postRY = noS_post6.RMC3_Y - min(noS_post6.RMC3_Y);
+
+preRZ = noS_pre.RMC3_Z - min(noS_pre.RMC3_Z);
+postRZ = noS_post6.RMC3_Z - min(noS_post6.RMC3_Z);
+
+%%
+
+preRXa = noS_pre.RMC3_X - min([noS_pre.RMC3_X ; noS_post6.RMC3_X]);
+postRXa = noS_post6.RMC3_X - min([noS_pre.RMC3_X ; noS_post6.RMC3_X]);
+
+preRYa = noS_pre.RMC3_Y - min([noS_pre.RMC3_Y;noS_post6.RMC3_Y] );
+postRYa = noS_post6.RMC3_Y - min([noS_pre.RMC3_Y;noS_post6.RMC3_Y]);
+
+preRZa = noS_pre.RMC3_Z - min([noS_pre.RMC3_Z; noS_post6.RMC3_Z]);
+postRZa = noS_post6.RMC3_Z - min([noS_pre.RMC3_Z; noS_post6.RMC3_Z]);
+
+
+%%
 nr = [1 0.7 0.7];
 nr2 = [1 0.5 0.5];
+figure;
+p3y = preRY;
+scatter3(preRX, p3y, preRZ,10,[1 0 0],'filled')
+hold on
+plot3(preRX, p3y, preRZ,'Color',[1 0 0])
 
-p3y = noS_post3.LMC3_Y;
-scatter3(noS_post3.LMC3_X, p3y, noS_post3.LMC3_Z,30,nr)
-
-p6y = noS_post6.LMC3_Y;
-scatter3(noS_post6.LMC3_X, p6y, noS_post6.LMC3_Z,30,nr2)
+p6y = postRY;
+scatter3(postRX, p6y, postRZ,10,[0 0 0],'filled')
+plot3(postRX, p6y, postRZ,'Color',[0 0 0])
 xlabel('x')
 ylabel('y')
 zlabel('z')
